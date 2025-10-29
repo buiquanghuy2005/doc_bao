@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/home_page.dart';
 
 void main() {
   runApp(const NewsApp());
@@ -14,9 +15,11 @@ class NewsApp extends StatefulWidget {
 class _NewsAppState extends State<NewsApp> {
   int currentIndex = 0;
 
-  final List<Widget> pages = const [
-    Center(child: Text('Trang Danh sách', style: TextStyle(fontSize: 20))),
-    Center(child: Text('Trang Yêu thích', style: TextStyle(fontSize: 20))),
+  final List<Widget> pages = [
+    HomePage(),
+    const Center(
+      child: Text('Trang Yêu thích', style: TextStyle(fontSize: 20)),
+    ),
   ];
 
   @override
@@ -26,7 +29,6 @@ class _NewsAppState extends State<NewsApp> {
       title: 'Simple News App',
       theme: ThemeData(primarySwatch: Colors.indigo),
       home: Scaffold(
-        appBar: AppBar(title: const Text('Ứng dụng đọc báo')),
         body: pages[currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
