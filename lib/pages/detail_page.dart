@@ -50,24 +50,38 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(title: Text(widget.article.title)),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(widget.article.imageUrl, fit: BoxFit.cover),
+            Container(
+              width: double.infinity,
+              height: 220,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(widget.article.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
                 widget.article.content,
-                style: const TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16, height: 1.5),
               ),
             ),
-            ElevatedButton.icon(
-              icon: Icon(
-                _isFavourite ? Icons.favorite : Icons.favorite_border,
-                color: _isFavourite ? Colors.red : null,
+
+            Center(
+              child: ElevatedButton.icon(
+                icon: Icon(
+                  _isFavourite ? Icons.favorite : Icons.favorite_border,
+                  color: _isFavourite ? Colors.red : null,
+                ),
+                label: Text(
+                  _isFavourite ? 'Xoá khỏi yêu thích' : 'Thêm vào yêu thích',
+                ),
+                onPressed: _toggleFavourite,
               ),
-              label: Text(
-                _isFavourite ? 'Xoá khỏi yêu thích' : 'Thêm vào yêu thích',
-              ),
-              onPressed: _toggleFavourite,
             ),
           ],
         ),
