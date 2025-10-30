@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'models/article.dart';
 import 'pages/home_page.dart';
+import 'pages/favourite_page.dart';
 
 void main() {
   runApp(const NewsApp());
@@ -13,17 +15,26 @@ class NewsApp extends StatefulWidget {
 }
 
 class _NewsAppState extends State<NewsApp> {
+  List<Article> favourites = [];
   int currentIndex = 0;
 
-  final List<Widget> pages = [
-    HomePage(),
-    const Center(
-      child: Text('Trang Yêu thích', style: TextStyle(fontSize: 20)),
-    ),
-  ];
+  void toggleFavourite(Article article) {
+    setState(() {
+      if (favourites.contains(article)) {
+        favourites.remove(article);
+      } else {
+        favourites.add(article);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      HomePage(onToggleFavourite: toggleFavourite, favourites: favourites),
+      FavouritePage(favourites: favourites, onToggleFavourite: toggleFavourite),
+    ];
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Simple News App',
