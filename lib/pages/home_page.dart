@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/articles_data.dart';
 import '../models/article.dart';
 import 'detail_page.dart';
+import 'about_page.dart';
 
 class HomePage extends StatefulWidget {
   final Function(Article) onAddToFavourite;
@@ -45,6 +46,24 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Danh sách bài báo'),
         centerTitle: true,
         backgroundColor: Colors.purple.shade100,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'about') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutPage()),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              const PopupMenuItem<String>(
+                value: 'about',
+                child: Text('Giới thiệu'),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Column(
         children: [
