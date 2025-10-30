@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/article.dart';
+import 'detail_page.dart'; // 👉 nhớ import file chi tiết
 
 class FavouritePage extends StatelessWidget {
   final List<Article> favourites;
@@ -38,18 +39,18 @@ class FavouritePage extends StatelessWidget {
                           ? article.content.substring(0, 60) + '...'
                           : article.content,
                     ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        onToggleFavourite(article);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Đã xóa khỏi danh sách yêu thích'),
-                            duration: Duration(seconds: 1),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPage(
+                            article: article,
+                            onAddToFavourite: onToggleFavourite,
+                            isFavourite: true,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
