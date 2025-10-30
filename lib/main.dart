@@ -30,8 +30,8 @@ class _NewsAppState extends State<NewsApp> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      HomePage(onToggleFavourite: toggleFavourite, favourites: favourites),
+    final pages = [
+      HomePage(onAddToFavourite: toggleFavourite, favourites: favourites),
       FavouritePage(favourites: favourites, onToggleFavourite: toggleFavourite),
     ];
 
